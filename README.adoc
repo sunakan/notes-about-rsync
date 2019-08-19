@@ -1,1 +1,7 @@
 = rsync
+
+----
+$ vagrant up
+#途中からprovision
+$ vagrant provision
+----
