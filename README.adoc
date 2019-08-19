@@ -5,3 +5,9 @@ $ vagrant up
 #途中からprovision
 $ vagrant provision
 ----
+
+=== 適当なサイズのファイルを作成
+
+----
+$ make setup
+----
