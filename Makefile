@@ -1,4 +1,5 @@
 SSH_OPTION=-i .vagrant/machines/rsync-sunabako/virtualbox/private_key -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no'
+BWLIMIT_OPTION=--bwlimit=50
 
 provision:
 	vagrant provision
@@ -15,7 +16,7 @@ setup:
 	python3 -c 'for i in range(0,50000):print("%i,HelloWorld" % i)' > tmp/elegant.txt
 
 rsync: setup
-	rsync -avhz -e "ssh ${SSH_OPTION}" ./tmp vagrant@192.168.33.21:/home/vagrant/abc
+	rsync -avhz ${BWLIMIT_OPTION} -e "ssh ${SSH_OPTION}" ./tmp vagrant@192.168.33.21:/home/vagrant/abc
 
 clear:
 	rm -rf empty/
