@@ -1,6 +1,6 @@
 $my_provision = <<MY_PROVISION
 apt-get update -qq
-apt-get install -y rsync
+apt-get install -y rsync tree
 MY_PROVISION
 
 Vagrant.configure("2") do |config|

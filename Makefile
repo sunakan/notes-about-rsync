@@ -1,3 +1,6 @@
+provision:
+	vagrant provision
+
 setup:
 	rm -rf tmp/
 	mkdir -p tmp/
