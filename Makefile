@@ -1,3 +1,5 @@
+SSH_OPTION=-i .vagrant/machines/rsync-sunabako/virtualbox/private_key -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no'
+
 provision:
 	vagrant provision
 
@@ -13,9 +15,9 @@ setup:
 	python3 -c 'for i in range(0,50000):print("%i,HelloWorld" % i)' > tmp/elegant.txt
 
 rsync: setup
-	rsync -avhz -e "ssh -i .vagrant/machines/rsync-sunabako/virtualbox/private_key -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no'" ./tmp vagrant@192.168.33.21:/home/vagrant/abc
+	rsync -avhz -e "ssh ${SSH_OPTION}" ./tmp vagrant@192.168.33.21:/home/vagrant/abc
 
 clear:
 	rm -rf empty/
 	mkdir -p empty/
-	rsync -avhz --delete -e "ssh -i .vagrant/machines/rsync-sunabako/virtualbox/private_key -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no'" ./empty vagrant@192.168.33.21:/home/vagrant/abc
+	rsync -avhz --delete -e "ssh ${SSH_OPTION}" ./empty/ vagrant@192.168.33.21:/home/vagrant/abc

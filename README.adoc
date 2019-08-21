@@ -11,3 +11,59 @@ $ vagrant provision
 ----
 $ make setup
 ----
+
+==== 送信元に末尾スラッシュ有り
+
+* 送信先(before)
++
+----
+$ tree
+.
+
+0 directories, 0 files
+----
+
+* コマンド(./tmp/と末尾スラッシュ)
++
+----
+$ rsync -avhz -e "ssh -i .vagrant/machines/rsync-sunabako/virtualbox/private_key -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no'" ./tmp/ vagrant@192.168.33.21:/home/vagrant/abc
+----
+
+* 送信先(After)
++
+----
+$ tree
+.
+`-- abc
+    |-- awesome.txt
+    |-- brilliant.txt
+    |-- cool.txt
+    |-- delicious.txt
+    `-- elegant.txt
+
+1 directory, 5 files
+----
+
+==== 送信元に末尾スラッシュ無し
+
+* コマンド(./tmpと末尾スラッシュ無し)
++
+----
+$ rsync -avhz -e "ssh -i .vagrant/machines/rsync-sunabako/virtualbox/private_key -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no'" ./tmp vagrant@192.168.33.21:/home/vagrant/abc
+----
+
+* 送信先(After)
++
+----
+$ tree
+.
+`-- abc
+    `-- tmp
+        |-- awesome.txt
+        |-- brilliant.txt
+        |-- cool.txt
+        |-- delicious.txt
+        `-- elegant.txt
+
+2 directories, 5 files
+----
